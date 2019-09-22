@@ -1,56 +1,56 @@
 CREATE TABLE IF NOT EXISTS Organization(
-    id INTEGER                      COMMENT 'уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT ,
-    name VARCHAR(10) NOT NULL       COMMENT 'имя компании',
-    full_name VARCHAR(50) NOT NULL  COMMENT 'полное имя компании',
-    inn        BIGINT NOT NULL      COMMENT 'ИНН компании',
-    kpp        INTEGER NOT NULL     COMMENT 'КПП компании',
-    address VARCHAR(50) NOT NULL    COMMENT 'адрес компании',
-    phone       BIGINT  NULL        COMMENT 'телефон компании',
-    is_active BOOLEAN NOT NULL      COMMENT 'активность фирмы'
+    id INTEGER                           COMMENT 'уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT ,
+    name VARCHAR(10) NOT NULL            COMMENT 'имя компании',
+    full_name VARCHAR(50) NOT NULL       COMMENT 'полное имя компании',
+    inn   VARCHAR(15) NOT NULL           COMMENT 'ИНН компании',
+    kpp    VARCHAR(15) NOT NULL          COMMENT 'КПП компании',
+    address VARCHAR(50) NOT NULL         COMMENT 'адрес компании',
+    phone  VARCHAR(15)  NULL             COMMENT 'телефон компании',
+    is_active BOOLEAN NOT NULL           COMMENT 'активность фирмы'
 );
 COMMENT ON TABLE Organization IS 'Организация';
 
 CREATE TABLE IF NOT EXISTS Office(
-    id INTEGER                      COMMENT 'уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT ,
-    name VARCHAR(20) NOT NULL       COMMENT 'имя офиса',
-    address VARCHAR(50) NOT NULL    COMMENT 'адрес офиса',
-    phone       BIGINT NULL         COMMENT 'телефон офиса',
-    is_active BOOLEAN NOT NULL      COMMENT 'активность офиса',
-    org_id INTEGER NOT NULL         COMMENT 'идентификатор организации'
+    id INTEGER                           COMMENT 'уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT ,
+    name VARCHAR(20) NOT NULL            COMMENT 'имя офиса',
+    address VARCHAR(50) NOT NULL         COMMENT 'адрес офиса',
+    phone  VARCHAR(15) NULL              COMMENT 'телефон офиса',
+    is_active BOOLEAN NOT NULL           COMMENT 'активность офиса',
+    org_id INTEGER NOT NULL              COMMENT 'идентификатор организации'
 );
 COMMENT ON TABLE Office IS 'Офис';
 
 CREATE TABLE IF NOT EXISTS User(
-    id INTEGER                        COMMENT 'уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT ,
-    first_name VARCHAR(20) NOT NULL   COMMENT 'имя пользователя',
-    second_name VARCHAR(20) NULL      COMMENT 'фамилия пользователя',
-    middle_name VARCHAR(20) NULL      COMMENT 'отчество пользователя',
-    position VARCHAR(50) NOT NULL     COMMENT 'должность',
-    phone       BIGINT NULL           COMMENT 'телефон',
-    office_id INTEGER NOT NULL        COMMENT 'идентификатор офиса',
-    citizenship_code INTEGER NOT NULL COMMENT 'гражданство',
-    doc_id INTEGER NOT NULL           COMMENT 'идентификатор документа'
+    id INTEGER                           COMMENT 'уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT ,
+    first_name VARCHAR(20) NOT NULL      COMMENT 'имя пользователя',
+    second_name VARCHAR(20) NULL         COMMENT 'фамилия пользователя',
+    middle_name VARCHAR(20) NULL         COMMENT 'отчество пользователя',
+    position VARCHAR(50) NOT NULL        COMMENT 'должность',
+    phone  VARCHAR(15) NULL              COMMENT 'телефон',
+    office_id INTEGER NOT NULL           COMMENT 'идентификатор офиса',
+    citizenship_code INTEGER NOT NULL    COMMENT 'гражданство',
+    doc_id INTEGER NOT NULL              COMMENT 'идентификатор документа'
 );
 COMMENT ON TABLE User IS 'Пользователь';
 
 CREATE TABLE IF NOT EXISTS Doc(
     id INTEGER                           COMMENT 'уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT,
     doc_date DATE NULL                   COMMENT 'дата документа',
-    doc_number       BIGINT NULL         COMMENT 'номер документа',
+    doc_number  VARCHAR(15) NULL         COMMENT 'номер документа',
     doc_code INTEGER NOT NULL            COMMENT 'идентификатор типа документа',
     is_identified BOOLEAN NOT NULL       COMMENT 'идентифицированный'
 );
 COMMENT ON TABLE Doc IS 'Документ';
 
 CREATE TABLE IF NOT EXISTS Doc_Type(
-    code INTEGER                       COMMENT 'уникальный идентификатор' PRIMARY KEY,
-    name VARCHAR(50) NOT NULL          COMMENT 'имя документа'
+    code INTEGER                         COMMENT 'уникальный идентификатор' PRIMARY KEY,
+    name VARCHAR(50) NOT NULL            COMMENT 'имя документа'
 );
 COMMENT ON TABLE Doc_Type IS 'Тип документа';
 
 CREATE TABLE IF NOT EXISTS Country(
-    code INTEGER                       COMMENT 'уникальный идентификатор' PRIMARY KEY,
-    name VARCHAR(50) NOT NULL          COMMENT 'имя страны'
+    code INTEGER                         COMMENT 'уникальный идентификатор' PRIMARY KEY,
+    name VARCHAR(50) NOT NULL            COMMENT 'имя страны'
 );
 COMMENT ON TABLE Country IS 'Страна';
 
