@@ -18,6 +18,6 @@ INSERT INTO User (first_name, second_name, middle_name, position, phone, office_
 INSERT INTO User (first_name, second_name, middle_name, position, phone, office_id, citizenship_code) VALUES ('Иван', 'Сухоруков', 'Андреевич', 'аналитик', '89177754322', 1, 643);
 INSERT INTO User (first_name, second_name, middle_name, position, phone, office_id, citizenship_code) VALUES ('Денис', 'Подлинов', 'Алексеевич', 'менеджер по проектам', '89177754322', 1, 643);
 
-INSERT INTO Doc (doc_date, doc_number, doc_code, is_identified, user_id) VALUES ('1992-04-21', '8012694822', 21, 'true',1);
-INSERT INTO Doc (doc_date, doc_number, doc_code, is_identified, user_id) VALUES ('1996-10-10', '4326795424', 21, TRUE,2);
-INSERT INTO Doc (doc_date, doc_number, doc_code, is_identified, user_id) VALUES ('1989-06-01', '432654', 3, FALSE,3);
+INSERT INTO Doc (id, doc_date, doc_number, doc_code, is_identified) VALUES (1,'1992-04-21', '8012694822', 21, 'true');
+INSERT INTO Doc (id, doc_date, doc_number, doc_code, is_identified) VALUES (2,'1996-10-10', '4326795424', 21, TRUE);
+INSERT INTO Doc (id, doc_date, doc_number, doc_code, is_identified) VALUES (3,'1989-06-01', '432654', 3, FALSE);

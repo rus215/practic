@@ -33,12 +33,11 @@ CREATE TABLE IF NOT EXISTS User(
 COMMENT ON TABLE User IS 'Пользователь';
 
 CREATE TABLE IF NOT EXISTS Doc(
-    id INTEGER                           COMMENT 'уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT,
+    id INTEGER                           COMMENT 'уникальный идентификатор' PRIMARY KEY,
     doc_date DATE NULL                   COMMENT 'дата документа',
     doc_number  VARCHAR(15) NULL         COMMENT 'номер документа',
     doc_code INTEGER NOT NULL            COMMENT 'идентификатор типа документа',
     is_identified BOOLEAN NOT NULL       COMMENT 'идентифицированный',
-    user_id INTEGER NOT NULL             COMMENT 'идентификатор пользователя'
 );
 COMMENT ON TABLE Doc IS 'Документ';
 
@@ -60,8 +59,8 @@ ALTER TABLE User ADD FOREIGN KEY (citizenship_code) REFERENCES Country(code);
 CREATE INDEX IX_Doc_doc_code ON Doc (doc_code);
 ALTER TABLE Doc ADD FOREIGN KEY (doc_code) REFERENCES Doc_Type(code);
 
-CREATE INDEX IX_Doc_user_id ON Doc (user_id);
-ALTER TABLE Doc ADD FOREIGN KEY (user_id) REFERENCES User(id);
+CREATE INDEX IX_Doc_id ON Doc (id);
+ALTER TABLE Doc ADD FOREIGN KEY (id) REFERENCES User(id);
 
 CREATE INDEX IX_User_office_id ON User (office_id);
 ALTER TABLE User ADD FOREIGN KEY (office_id) REFERENCES Office(id);
