@@ -50,9 +50,11 @@ public class Doc {
     public Doc() {
     }
 
-    public Doc(Date docDate, String docNumber, boolean isIdentified) {
+    public Doc(int id, Date docDate, String docNumber, DocType docType, boolean isIdentified) {
+        this.id = id;
         this.docDate = docDate;
         this.docNumber = docNumber;
+        this.docType = docType;
         this.isIdentified = isIdentified;
     }
 
