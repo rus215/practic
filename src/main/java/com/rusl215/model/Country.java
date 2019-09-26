@@ -1,8 +1,8 @@
 package com.rusl215.model;
 
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 /**
  * Страна
@@ -17,13 +17,6 @@ public class Country {
      */
     @Column(nullable = false, length = 50)
     private String name;
-
-    /**
-     * Список граждан страны
-     */
-    @OneToMany(mappedBy = "country", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    private List<User> users;
-
 
     /**
      * Конструктор для Hibernate
@@ -50,34 +43,5 @@ public class Country {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<User> getUsers() {
-        if (users == null){
-            users = new ArrayList<>();
-        }
-        return users;
-    }
-
-    public void setUsers(List<User> users) {
-        this.users = users;
-    }
-
-    /**
-     * Добавление гражданина страны
-     * @param user - гражданин
-     */
-    public void addUser(User user){
-        getUsers().add(user);
-        user.setCountry(this);
-    }
-
-    /**
-     * Удаление гражданина страны
-     * @param user - гражданин
-     */
-    public void RemoveUser(User user){
-        getUsers().remove(user);
-        user.setCountry(null);
     }
 }

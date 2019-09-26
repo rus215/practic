@@ -1,6 +1,16 @@
 package com.rusl215.model;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Column;
+import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.FetchType;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
+import javax.persistence.CascadeType;
 
 /**
  * Пользователь
@@ -42,13 +52,6 @@ public class User {
     private String phone;
 
     /**
-     * Офис в котором работает пользователь
-     */
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "office_id")
-    private Office office;
-
-    /**
      * Гражданство пользователя
      */
     @ManyToOne(fetch = FetchType.LAZY)
@@ -58,7 +61,8 @@ public class User {
     /**
      * Документ пользователя
      */
-    @OneToOne(mappedBy = "user",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @MapsId
     private Doc doc;
 
     /**
@@ -121,14 +125,6 @@ public class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public Office getOffice() {
-        return office;
-    }
-
-    public void setOffice(Office office) {
-        this.office = office;
     }
 
     public Country getCountry() {

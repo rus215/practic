@@ -1,6 +1,13 @@
 package com.rusl215.model;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.GenerationType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Column;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.CascadeType;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,16 +45,10 @@ public class Office {
     private boolean isActive;
 
     /**
-     * Организация офиса
-     */
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "org_id")
-    private Organization organization;
-
-    /**
      * Сотрудники офиса
      */
-    @OneToMany(mappedBy = "office", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @JoinColumn(name = "office_id")
     private List<User> users;
 
     /**
@@ -103,14 +104,6 @@ public class Office {
         isActive = active;
     }
 
-    public Organization getOrganization() {
-        return organization;
-    }
-
-    public void setOrganization(Organization organization) {
-        this.organization = organization;
-    }
-
     public List<User> getUsers() {
         if (users == null){
             users = new ArrayList<>();
@@ -128,7 +121,6 @@ public class Office {
      */
     public void addUser(User user){
         getUsers().add(user);
-        user.setOffice(this);
     }
 
     /**
@@ -137,6 +129,5 @@ public class Office {
      */
     public void removeUser(User user){
         getUsers().remove(user);
-        user.setOffice(null);
     }
 }

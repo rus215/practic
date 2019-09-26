@@ -1,6 +1,13 @@
 package com.rusl215.model;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,7 +65,8 @@ public class Organization {
     /**
      * Офисы организации
      */
-    @OneToMany(mappedBy = "organization", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @JoinColumn(name = "org_id")
     private List<Office> offices;
 
     /**
@@ -154,19 +162,19 @@ public class Organization {
 
     /**
      * Добавление офиса
+     *
      * @param office - офис
      */
     public void addOffice(Office office) {
         getOffices().add(office);
-        office.setOrganization(this);
     }
 
     /**
      * Удаление офиса
+     *
      * @param office - офис
      */
     public void removeOffice(Office office) {
         getOffices().remove(office);
-        office.setOrganization(null);
     }
 }

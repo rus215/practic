@@ -1,8 +1,9 @@
 package com.rusl215.model;
 
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Id;
+import javax.persistence.Column;
 
 /**
  * Тип документа
@@ -18,12 +19,6 @@ public class DocType {
      */
     @Column(nullable = false, length = 50)
     private String name;
-
-    /**
-     * Документы заданного типа
-     */
-    @OneToMany(mappedBy = "docType", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    private List<Doc> docs;
 
     /**
      * Конструктор для Hibernate
@@ -50,34 +45,5 @@ public class DocType {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<Doc> getDocs() {
-        if (docs == null){
-            docs = new ArrayList<>();
-        }
-        return docs;
-    }
-
-    public void setDocs(List<Doc> docs) {
-        this.docs = docs;
-    }
-
-    /**
-     * Добавление документа
-     * @param doc - документ
-     */
-    public void addDoc(Doc doc){
-        getDocs().add(doc);
-        doc.setDocType(this);
-    }
-
-    /**
-     * Удаление документа
-     * @param doc - документ
-     */
-    public void removeDoc(Doc doc){
-        getDocs().remove(doc);
-        doc.setDocType(null);
     }
 }

@@ -1,6 +1,13 @@
 package com.rusl215.model;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import java.util.Date;
 
 /**
@@ -9,7 +16,6 @@ import java.util.Date;
 @Entity
 public class Doc {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     /**
@@ -37,13 +43,6 @@ public class Doc {
      */
     @Column(name = "is_identified", nullable = false)
     private boolean isIdentified;
-
-    /**
-     * Владелец документа
-     */
-    @OneToOne(fetch = FetchType.LAZY)
-    @MapsId
-    private User user;
 
     /**
      * Конструктор для Hibernate
@@ -97,11 +96,4 @@ public class Doc {
         isIdentified = identified;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 }
