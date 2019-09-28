@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.CascadeType;
+import javax.persistence.Version;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,6 +51,12 @@ public class Office {
     @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JoinColumn(name = "office_id")
     private List<User> users;
+
+    /**
+     * Оптимистичная блокировка по полю version
+     */
+    @Version
+    private Integer version;
 
     /**
      * Конструктор для Hibernate

@@ -3,6 +3,7 @@ package com.rusl215.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Version;
 
 /**
  * Страна
@@ -17,6 +18,12 @@ public class Country {
      */
     @Column(nullable = false, length = 50)
     private String name;
+
+    /**
+     * Оптимистичная блокировка по полю version
+     */
+    @Version
+    private Integer version;
 
     /**
      * Конструктор для Hibernate

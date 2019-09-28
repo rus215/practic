@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Id;
 import javax.persistence.Column;
+import javax.persistence.Version;
 
 /**
  * Тип документа
@@ -19,6 +20,12 @@ public class DocType {
      */
     @Column(nullable = false, length = 50)
     private String name;
+
+    /**
+     * Оптимистичная блокировка по полю version
+     */
+    @Version
+    private Integer version;
 
     /**
      * Конструктор для Hibernate

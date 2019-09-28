@@ -8,6 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Version;
 import java.util.Date;
 
 /**
@@ -43,6 +44,12 @@ public class Doc {
      */
     @Column(name = "is_identified", nullable = false)
     private boolean isIdentified;
+
+    /**
+     * Оптимистичная блокировка по полю version
+     */
+    @Version
+    private Integer version;
 
     /**
      * Конструктор для Hibernate

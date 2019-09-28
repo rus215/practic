@@ -11,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.CascadeType;
+import javax.persistence.Version;
 
 /**
  * Пользователь
@@ -64,6 +65,12 @@ public class User {
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @MapsId
     private Doc doc;
+
+    /**
+     * Оптимистичная блокировка по полю version
+     */
+    @Version
+    private Integer version;
 
     /**
      * Конструктор для Hibernate
