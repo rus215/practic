@@ -2,7 +2,7 @@ package com.rusl215.controller;
 
 import com.rusl215.view.organization.OrganizationListView;
 import com.rusl215.view.organization.OrganizationView;
-import com.rusl215.view.SuccessResultView;
+import com.rusl215.view.success.SuccessResultView;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,10 +25,10 @@ public class OrganizationController {
 
     /**
      * Получить список организаций по фильтрам
-     * @param name - имя организации, обязательный параметр
-     * @param inn - ИНН организации
+     * @param name     - имя организации, обязательный параметр
+     * @param inn      - ИНН организации
      * @param isActive - активность организации
-     * @return - возвращает список организаций
+     * @return - список организаций
      */
     @PostMapping(value = "/list")
     public List<OrganizationListView> getOrganizationList(@RequestParam String name, String inn, boolean isActive) {
@@ -43,7 +43,7 @@ public class OrganizationController {
     /**
      * Получить организацию по идентификатору
      * @param id - идентификатор организации, обязательный параметр
-     * @return - возвращает организацию
+     * @return - организацию
      */
     @GetMapping(value = "/{id}")
     public OrganizationView getOrganizationById(@PathVariable int id){
@@ -55,15 +55,15 @@ public class OrganizationController {
 
     /**
      * Обновить организацию
-     * @param id - идентификатор организации, обязательный параметр
-     * @param name - сокращенное название организации, обязательный параметр
+     * @param id       - идентификатор организации, обязательный параметр
+     * @param name     - сокращенное название организации, обязательный параметр
      * @param fullName - полное название организации, обязательный параметр
-     * @param inn - ИНН организации, обязательный параметр
-     * @param kpp - КПП организации, обязательный параметр
-     * @param address - адрес организации, обязательный параметр
-     * @param phone - телефон организации
+     * @param inn      - ИНН организации, обязательный параметр
+     * @param kpp      - КПП организации, обязательный параметр
+     * @param address  - адрес организации, обязательный параметр
+     * @param phone    - телефон организации
      * @param isActive - активность организации
-     * @return - возвращает сообщение result:success в случае успеха
+     * @return - result:success в случае успеха
      */
     @PostMapping(value = "/update")
     public SuccessResultView updateOrganization(@RequestParam int id,@RequestParam String name,@RequestParam String fullName,@RequestParam String inn,@RequestParam String kpp,@RequestParam String address, String phone, boolean isActive){
@@ -72,14 +72,14 @@ public class OrganizationController {
 
     /**
      * Сохранить организацию
-     * @param name - сокращенное название организации, обязательный параметр
+     * @param name     - сокращенное название организации, обязательный параметр
      * @param fullName - полное название организации, обязательный параметр
-     * @param inn - ИНН организации, обязательный параметр
-     * @param kpp - КПП организации, обязательный параметр
-     * @param address - адрес организации, обязательный параметр
-     * @param phone - телефон организации
+     * @param inn      - ИНН организации, обязательный параметр
+     * @param kpp      - КПП организации, обязательный параметр
+     * @param address  - адрес организации, обязательный параметр
+     * @param phone    - телефон организации
      * @param isActive - активность организации
-     * @return - возвращает сообщение result:success в случае успеха
+     * @return - сообщение result:success в случае успеха
      */
     @PostMapping(value = "/save")
     public SuccessResultView saveOrganization(@RequestParam String name,@RequestParam String fullName,@RequestParam String inn,@RequestParam String kpp,@RequestParam String address, String phone, boolean isActive){

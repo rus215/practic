@@ -1,6 +1,6 @@
 package com.rusl215.controller;
 
-import com.rusl215.view.HandbookView;
+import com.rusl215.view.handbook.HandbookView;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +19,7 @@ import static com.rusl215.MyUtil.getHandbookView;
 public class HandbookController {
 
     /**
-     * @return - возвращает список документов
+     * @return - список документов
      */
     @GetMapping(value = "/docs")
     public List<HandbookView> getAllDocs(){
@@ -31,7 +31,7 @@ public class HandbookController {
     }
 
     /**
-     * @return - возвращает список стран
+     * @return - список стран
      */
     @GetMapping(value = "/countries")
     public List<HandbookView> getAllContries(){

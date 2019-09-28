@@ -1,6 +1,6 @@
 package com.rusl215.controller;
 
-import com.rusl215.view.SuccessResultView;
+import com.rusl215.view.success.SuccessResultView;
 import com.rusl215.view.user.UserListView;
 import com.rusl215.view.user.UserView;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,14 +25,14 @@ public class UserController {
 
     /**
      * Получить список сотрудников по фильтрам
-     * @param officeId - идентификатор офиса, обязательный параметр
-     * @param firstName - имя сотрудника
-     * @param lastName - фамилия сотрудника
-     * @param middleName - отчество сотрудника
-     * @param position - должность сотрудника
-     * @param docCode - идентификатор документа
+     * @param officeId        - идентификатор офиса, обязательный параметр
+     * @param firstName       - имя сотрудника
+     * @param lastName        - фамилия сотрудника
+     * @param middleName      - отчество сотрудника
+     * @param position        - должность сотрудника
+     * @param docCode         - идентификатор документа
      * @param citizenshipCode - идентификатор гражданства
-     * @return - возвращает список сотрудников
+     * @return - список сотрудников
      */
     @PostMapping(value = "/list")
     public List<UserListView> getUserList(@RequestParam int officeId, String firstName, String lastName, String middleName, String position, Integer docCode, Integer citizenshipCode) {
@@ -46,8 +46,8 @@ public class UserController {
 
     /**
      * Получить сотрудника по идентификатору
-     * @param id - идентификатор сотрудника
-     * @return - возвращает сотрудника, обязательный параметр
+     * @param id - идентификатор сотрудника, обязательный параметр
+     * @return - сотрудника
      */
     @GetMapping(value = "/{id}")
     public UserView getUserById(@PathVariable int id) {
@@ -58,19 +58,19 @@ public class UserController {
 
     /**
      * Обновить данные сотрудника
-     * @param id - идентификатор сотрудника, обязательный параметр
-     * @param officeId - идентификатор офиса
-     * @param firstName - имя сотрудника, обязательный параметр
-     * @param secondName - фамилия сотрудника
-     * @param middleName - отчество сотрудника
-     * @param position - должность сотрудника, обязательный параметр
-     * @param phone - телефон сотрудника
-     * @param docName - название документа сотрудника
-     * @param docNumber - номер документа
-     * @param docDate - дата документа
+     * @param id              - идентификатор сотрудника, обязательный параметр
+     * @param officeId        - идентификатор офиса
+     * @param firstName       - имя сотрудника, обязательный параметр
+     * @param secondName      - фамилия сотрудника
+     * @param middleName      - отчество сотрудника
+     * @param position        - должность сотрудника, обязательный параметр
+     * @param phone           - телефон сотрудника
+     * @param docName         - название документа сотрудника
+     * @param docNumber       - номер документа
+     * @param docDate         - дата документа
      * @param citizenshipCode - код гражданства сотрудника
-     * @param isIdentified - идентифицированность
-     * @return - возвращает сообщение result:success в случае успеха
+     * @param isIdentified    - идентифицированность
+     * @return - сообщение result:success в случае успеха
      */
     @PostMapping(value = "/update")
     public SuccessResultView updateUser(@RequestParam int id, Integer officeId, @RequestParam String firstName, String secondName, String middleName, @RequestParam String position, String phone, String docName, Integer docNumber, String docDate, Integer citizenshipCode, boolean isIdentified){
@@ -79,18 +79,18 @@ public class UserController {
 
     /**
      * Сохранить данные сотрудника
-     * @param officeId - идентификатор офиса, обязательный параметр
-     * @param firstName - имя сотрудника, обязательный параметр
-     * @param secondName - фамилия сотрудника
-     * @param middleName - отчество сотрудника
-     * @param position - должность сотрудника, обязательный параметр
-     * @param phone - телефон сотрудника
-     * @param docName - название документа сотрудника
-     * @param docNumber - номер документа
-     * @param docDate - дата документа
+     * @param officeId        - идентификатор офиса, обязательный параметр
+     * @param firstName       - имя сотрудника, обязательный параметр
+     * @param secondName      - фамилия сотрудника
+     * @param middleName      - отчество сотрудника
+     * @param position        - должность сотрудника, обязательный параметр
+     * @param phone           - телефон сотрудника
+     * @param docName         - название документа сотрудника
+     * @param docNumber       - номер документа
+     * @param docDate         - дата документа
      * @param citizenshipCode - код гражданства сотрудника
-     * @param isIdentified - идентифицированность
-     * @return - возвращает сообщение result:success в случае успеха
+     * @param isIdentified    - идентифицированность
+     * @return - сообщение result:success в случае успеха
      */
     @PostMapping(value = "/save")
     public SuccessResultView saveUser(@RequestParam int officeId, @RequestParam String firstName, String secondName, String middleName, @RequestParam String position, String phone, String docName, Integer docNumber, String docDate, Integer citizenshipCode, boolean isIdentified){

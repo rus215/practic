@@ -12,8 +12,8 @@ public class ResponseWrapper implements ResponseBodyAdvice {
     /**
      * метод, разрешающий оборачивание объектов
      * @param methodParameter - параметры класса данных
-     * @param aClass - класс данных
-     * @return - возвращает true в случае если оборачивание разрешено и false в противном случае
+     * @param aClass          - класс данных
+     * @return - true в случае если оборачивание разрешено и false в противном случае
      */
     @Override
     public boolean supports(MethodParameter methodParameter, Class aClass) {
@@ -21,12 +21,12 @@ public class ResponseWrapper implements ResponseBodyAdvice {
     }
 
     /**
-     * Метод оборачивания успешных результатов запросов
-     * @param body - результат запроса
-     * @param methodParameter - параметры класса данных
-     * @param mediaType - тип возвращаемых данных данных
-     * @param aClass - класс данных
-     * @param serverHttpRequest - http запрос
+     * метод оборачивания успешных результатов запросов
+     * @param body               - результат запроса
+     * @param methodParameter    - параметры класса данных
+     * @param mediaType          - тип возвращаемых данных данных
+     * @param aClass             - класс данных
+     * @param serverHttpRequest  - http запрос
      * @param serverHttpResponse - http ответ
      * @return - возвращает данные, обернутые параметром data
      */
