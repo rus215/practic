@@ -1,69 +1,79 @@
-package com.rusl215.model;
+package com.rusl215.model.user;
 
+import com.rusl215.model.country.Country;
+import com.rusl215.model.doc.Doc;
+import com.rusl215.model.office.Office;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Column;
-import javax.persistence.ManyToOne;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.FetchType;
-import javax.persistence.MapsId;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import javax.persistence.CascadeType;
 import javax.persistence.Version;
 
 /**
- * Пользователь
+ * Сотрудник
  */
 @Entity
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     /**
-     * Имя пользователя
+     * Имя сотрудника
      */
     @Column(name = "first_name", length = 20, nullable = false)
     private String firstName;
 
     /**
-     * Фамилия пользователя
+     * Фамилия сотрудника
      */
     @Column(name = "second_name", length = 20)
     private String secondName;
 
     /**
-     * Отчество пользователя
+     * Отчество сотрудника
      */
     @Column(name = "middle_name", length = 20)
     private String middleName;
 
     /**
-     * Должность пользователя
+     * Должность сотрудника
      */
     @Column(length = 50, nullable = false)
     private String position;
 
     /**
-     * Телефон пользователя
+     * Телефон сотрудника
      */
     @Column(length = 15)
     private String phone;
 
     /**
-     * Гражданство пользователя
+     * Офис сотрудника
+     */
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "office_id")
+    private Office office;
+
+    /**
+     * Гражданство сотрудника
      */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "citizenship_code")
     private Country country;
 
     /**
-     * Документ пользователя
+     * Документ сотрудника
      */
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @MapsId
+    @JoinColumn(name = "id")
     private Doc doc;
 
     /**
@@ -78,20 +88,13 @@ public class User {
     public User() {
     }
 
-    public User(String firstName, String secondName, String middleName, String position, String phone) {
+    public User(String firstName, String position) {
         this.firstName = firstName;
-        this.secondName = secondName;
-        this.middleName = middleName;
         this.position = position;
-        this.phone = phone;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getFirstName() {
@@ -148,5 +151,13 @@ public class User {
 
     public void setDoc(Doc doc) {
         this.doc = doc;
+    }
+
+    public Office getOffice() {
+        return office;
+    }
+
+    public void setOffice(Office office) {
+        this.office = office;
     }
 }

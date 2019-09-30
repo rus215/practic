@@ -1,4 +1,4 @@
-package com.rusl215.model;
+package com.rusl215.model.doc;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,7 +17,7 @@ import java.util.Date;
 @Entity
 public class Doc {
     @Id
-    private int id;
+    private Long id;
 
     /**
      * Дата документа
@@ -42,8 +42,8 @@ public class Doc {
     /**
      * Идентифицированный
      */
-    @Column(name = "is_identified", nullable = false)
-    private boolean isIdentified;
+    @Column(name = "is_identified")
+    private Boolean isIdentified;
 
     /**
      * Оптимистичная блокировка по полю version
@@ -57,7 +57,7 @@ public class Doc {
     public Doc() {
     }
 
-    public Doc(int id, Date docDate, String docNumber, DocType docType, boolean isIdentified) {
+    public Doc(Long id, Date docDate, String docNumber, DocType docType, Boolean isIdentified) {
         this.id = id;
         this.docDate = docDate;
         this.docNumber = docNumber;
@@ -65,11 +65,11 @@ public class Doc {
         this.isIdentified = isIdentified;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -97,11 +97,11 @@ public class Doc {
         this.docType = docType;
     }
 
-    public boolean isIdentified() {
+    public Boolean getIsIdentified() {
         return isIdentified;
     }
 
-    public void setIdentified(boolean identified) {
+    public void setIdentified(Boolean identified) {
         isIdentified = identified;
     }
 

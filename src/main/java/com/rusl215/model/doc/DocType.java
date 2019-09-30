@@ -1,20 +1,22 @@
-package com.rusl215.model;
+package com.rusl215.model.doc;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.persistence.Version;
 
 /**
- * Страна
+ * Тип документа
  */
 @Entity
-public class Country {
+@Table(name = "Doc_Type")
+public class DocType {
     @Id
-    private int code;
+    private Long code;
 
     /**
-     * Название страны
+     * Название документа
      */
     @Column(nullable = false, length = 50)
     private String name;
@@ -28,19 +30,19 @@ public class Country {
     /**
      * Конструктор для Hibernate
      */
-    public Country() {
+    public DocType() {
     }
 
-    public Country(int code, String name) {
+    public DocType(Long code, String name) {
         this.code = code;
         this.name = name;
     }
 
-    public int getCode() {
+    public Long getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(Long code) {
         this.code = code;
     }
 

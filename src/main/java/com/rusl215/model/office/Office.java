@@ -1,13 +1,18 @@
-package com.rusl215.model;
+package com.rusl215.model.office;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.GenerationType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import com.rusl215.model.organization.Organization;
+import com.rusl215.model.user.User;
+
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Version;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,18 +24,18 @@ import java.util.List;
 public class Office {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     /**
      * Название офиса
      */
-    @Column(nullable = false, length = 20)
+    @Column(length = 20)
     private String name;
 
     /**
      * Адрес офиса
      */
-    @Column(nullable = false, length = 50)
+    @Column(length = 50)
     private String address;
 
     /**
@@ -42,8 +47,8 @@ public class Office {
     /**
      * Активность офиса
      */
-    @Column(name = "is_active", nullable = false)
-    private boolean isActive;
+    @Column(name = "is_active")
+    private Boolean isActive;
 
     /**
      * Сотрудники офиса
@@ -51,6 +56,10 @@ public class Office {
     @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JoinColumn(name = "office_id")
     private List<User> users;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "org_id")
+    private Organization organization;
 
     /**
      * Оптимистичная блокировка по полю version
@@ -64,19 +73,14 @@ public class Office {
     public Office() {
     }
 
-    public Office(String name, String address, String phone, boolean isActive) {
+    public Office(String name, String address, String phone) {
         this.name = name;
         this.address = address;
         this.phone = phone;
-        this.isActive = isActive;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -103,16 +107,16 @@ public class Office {
         this.phone = phone;
     }
 
-    public boolean isActive() {
+    public Boolean getIsActive() {
         return isActive;
     }
 
-    public void setActive(boolean active) {
-        isActive = active;
+    public void setActive(Boolean isActive) {
+        this.isActive = isActive;
     }
 
     public List<User> getUsers() {
-        if (users == null){
+        if (users == null) {
             users = new ArrayList<>();
         }
         return users;
@@ -122,19 +126,29 @@ public class Office {
         this.users = users;
     }
 
+    public Organization getOrganization() {
+        return organization;
+    }
+
+    public void setOrganization(Organization organization) {
+        this.organization = organization;
+    }
+
     /**
      * Добавление сотрудника
+     *
      * @param user - сотрудник
      */
-    public void addUser(User user){
+    public void addUser(User user) {
         getUsers().add(user);
     }
 
     /**
      * Удаление сотрудника
+     *
      * @param user - сотрудник
      */
-    public void removeUser(User user){
+    public void removeUser(User user) {
         getUsers().remove(user);
     }
 }

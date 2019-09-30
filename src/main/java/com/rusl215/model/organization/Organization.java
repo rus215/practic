@@ -1,4 +1,6 @@
-package com.rusl215.model;
+package com.rusl215.model.organization;
+
+import com.rusl215.model.office.Office;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -19,7 +21,7 @@ import java.util.List;
 public class Organization {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     /**
      * Сокращенное название организации
@@ -60,8 +62,8 @@ public class Organization {
     /**
      * Активность организации
      */
-    @Column(name = "is_active", nullable = false)
-    private boolean isActive;
+    @Column(name = "is_active")
+    private Boolean isActive;
 
     /**
      * Офисы организации
@@ -82,22 +84,16 @@ public class Organization {
     public Organization() {
     }
 
-    public Organization(String name, String fullName, String inn, String kpp, String address, String phone, boolean isActive) {
+    public Organization(String name, String fullName, String inn, String kpp, String address) {
         this.name = name;
         this.fullName = fullName;
         this.inn = inn;
         this.kpp = kpp;
         this.address = address;
-        this.phone = phone;
-        this.isActive = isActive;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -148,11 +144,11 @@ public class Organization {
         this.phone = phone;
     }
 
-    public boolean isActive() {
+    public Boolean getIsActive() {
         return isActive;
     }
 
-    public void setActive(boolean active) {
+    public void setActive(Boolean active) {
         isActive = active;
     }
 
