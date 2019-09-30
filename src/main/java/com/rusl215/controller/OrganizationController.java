@@ -1,8 +1,10 @@
 package com.rusl215.controller;
 
+import com.rusl215.service.organization.OrganizationService;
 import com.rusl215.view.organization.OrganizationListView;
 import com.rusl215.view.organization.OrganizationView;
 import com.rusl215.view.success.SuccessResultView;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,10 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import static com.rusl215.MyUtil.getOrganizationListView;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 /**
@@ -23,38 +23,41 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping(value = "/api/organization", produces = APPLICATION_JSON_VALUE)
 public class OrganizationController {
 
+    private OrganizationService organizationService;
+
+    @Autowired
+    public OrganizationController(OrganizationService organizationService) {
+        this.organizationService = organizationService;
+    }
+
     /**
      * Получить список организаций по фильтрам
+     *
      * @param name     - имя организации, обязательный параметр
      * @param inn      - ИНН организации
      * @param isActive - активность организации
      * @return - список организаций
      */
     @PostMapping(value = "/list")
-    public List<OrganizationListView> getOrganizationList(@RequestParam String name, String inn, boolean isActive) {
-        List<OrganizationListView> list = new ArrayList<>();
-        list.add(getOrganizationListView("1", name, false));
-        list.add(getOrganizationListView("2", name, true));
-        list.add(getOrganizationListView("3", name, true));
+    public List<OrganizationListView> getOrganizationList(@RequestParam String name, String inn, Boolean isActive) {
 
-        return list;
+        return organizationService.filterOrganization(name, inn, isActive);
     }
 
     /**
      * Получить организацию по идентификатору
+     *
      * @param id - идентификатор организации, обязательный параметр
      * @return - организацию
      */
     @GetMapping(value = "/{id}")
-    public OrganizationView getOrganizationById(@PathVariable int id){
-        OrganizationView organizationView = new OrganizationView();
-        organizationView.id = String.valueOf(id);
-        organizationView.address = "ул. Цурюпы 6";
-        return organizationView;
+    public OrganizationView getOrganizationById(@PathVariable Long id) {
+        return organizationService.organizationById(id);
     }
 
     /**
      * Обновить организацию
+     *
      * @param id       - идентификатор организации, обязательный параметр
      * @param name     - сокращенное название организации, обязательный параметр
      * @param fullName - полное название организации, обязательный параметр
@@ -66,12 +69,13 @@ public class OrganizationController {
      * @return - result:success в случае успеха
      */
     @PostMapping(value = "/update")
-    public SuccessResultView updateOrganization(@RequestParam int id,@RequestParam String name,@RequestParam String fullName,@RequestParam String inn,@RequestParam String kpp,@RequestParam String address, String phone, boolean isActive){
-       return new SuccessResultView();
+    public SuccessResultView updateOrganization(@RequestParam Long id, @RequestParam String name, @RequestParam String fullName, @RequestParam String inn, @RequestParam String kpp, @RequestParam String address, String phone, Boolean isActive) {
+        return organizationService.updateOrganization(id, name, fullName, inn, kpp, address, phone, isActive);
     }
 
     /**
      * Сохранить организацию
+     *
      * @param name     - сокращенное название организации, обязательный параметр
      * @param fullName - полное название организации, обязательный параметр
      * @param inn      - ИНН организации, обязательный параметр
@@ -82,7 +86,7 @@ public class OrganizationController {
      * @return - сообщение result:success в случае успеха
      */
     @PostMapping(value = "/save")
-    public SuccessResultView saveOrganization(@RequestParam String name,@RequestParam String fullName,@RequestParam String inn,@RequestParam String kpp,@RequestParam String address, String phone, boolean isActive){
-        return new SuccessResultView();
+    public SuccessResultView saveOrganization(@RequestParam String name, @RequestParam String fullName, @RequestParam String inn, @RequestParam String kpp, @RequestParam String address, String phone, Boolean isActive) {
+        return organizationService.saveOrganization(name, fullName, inn, kpp, address, phone, isActive);
     }
 }
