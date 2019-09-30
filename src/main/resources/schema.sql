@@ -7,17 +7,17 @@ CREATE TABLE IF NOT EXISTS Organization(
     kpp    VARCHAR(15) NOT NULL          COMMENT 'КПП компании',
     address VARCHAR(50) NOT NULL         COMMENT 'адрес компании',
     phone  VARCHAR(15)  NULL             COMMENT 'телефон компании',
-    is_active BOOLEAN NOT NULL           COMMENT 'активность фирмы'
+    is_active BOOLEAN     NULL           COMMENT 'активность фирмы'
 );
 COMMENT ON TABLE Organization IS 'Организация';
 
 CREATE TABLE IF NOT EXISTS Office(
     id INTEGER                           COMMENT 'уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT ,
     version    INTEGER NOT NULL          COMMENT 'служебное поле hibernate',
-    name VARCHAR(20) NOT NULL            COMMENT 'имя офиса',
-    address VARCHAR(50) NOT NULL         COMMENT 'адрес офиса',
+    name VARCHAR(20)     NULL            COMMENT 'имя офиса',
+    address VARCHAR(50)     NULL         COMMENT 'адрес офиса',
     phone  VARCHAR(15) NULL              COMMENT 'телефон офиса',
-    is_active BOOLEAN NOT NULL           COMMENT 'активность офиса',
+    is_active BOOLEAN     NULL           COMMENT 'активность офиса',
     org_id INTEGER NOT NULL              COMMENT 'идентификатор организации'
 );
 COMMENT ON TABLE Office IS 'Офис';
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS User(
     position VARCHAR(50) NOT NULL        COMMENT 'должность',
     phone  VARCHAR(15) NULL              COMMENT 'телефон',
     office_id INTEGER NOT NULL           COMMENT 'идентификатор офиса',
-    citizenship_code INTEGER NOT NULL    COMMENT 'гражданство'
+    citizenship_code INTEGER     NULL    COMMENT 'гражданство'
 );
 COMMENT ON TABLE User IS 'Пользователь';
 
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS Doc(
     doc_date DATE NULL                   COMMENT 'дата документа',
     doc_number  VARCHAR(15) NULL         COMMENT 'номер документа',
     doc_code INTEGER NOT NULL            COMMENT 'идентификатор типа документа',
-    is_identified BOOLEAN NOT NULL       COMMENT 'идентифицированный',
+    is_identified BOOLEAN     NULL       COMMENT 'идентифицированный',
 );
 COMMENT ON TABLE Doc IS 'Документ';
 
