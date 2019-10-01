@@ -9,27 +9,11 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 @ControllerAdvice(basePackages = "com.rusl215.controller")
 public class ResponseWrapper implements ResponseBodyAdvice {
-    /**
-     * метод, разрешающий оборачивание объектов
-     * @param methodParameter - параметры класса данных
-     * @param aClass          - класс данных
-     * @return - true в случае если оборачивание разрешено и false в противном случае
-     */
     @Override
     public boolean supports(MethodParameter methodParameter, Class aClass) {
-        return true;
+        return !methodParameter.getContainingClass().isInstance(new ExceptionHandling());
     }
 
-    /**
-     * метод оборачивания успешных результатов запросов
-     * @param body               - результат запроса
-     * @param methodParameter    - параметры класса данных
-     * @param mediaType          - тип возвращаемых данных данных
-     * @param aClass             - класс данных
-     * @param serverHttpRequest  - http запрос
-     * @param serverHttpResponse - http ответ
-     * @return - возвращает данные, обернутые параметром data
-     */
     @Override
     public Object beforeBodyWrite(Object body, MethodParameter methodParameter, MediaType mediaType, Class aClass, ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
         return new DataWrapper<>(body);
@@ -37,9 +21,10 @@ public class ResponseWrapper implements ResponseBodyAdvice {
 
     /**
      * Класс обертка, оборачивает успешные результаты запросов в параметр data
+     *
      * @param <T> - оборачиваемый тип данных
      */
-    private class DataWrapper<T>{
+    private static class DataWrapper<T> {
         private T data;
 
         public DataWrapper(T data) {
