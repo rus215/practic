@@ -33,14 +33,7 @@ public class UserController {
     /**
      * Получить список сотрудников по фильтрам
      *
-     * @param officeId        - идентификатор офиса, обязательный параметр
-     * @param firstName       - имя сотрудника
-     * @param lastName        - фамилия сотрудника
-     * @param middleName      - отчество сотрудника
-     * @param position        - должность сотрудника
-     * @param docCode         - идентификатор документа
-     * @param citizenshipCode - идентификатор гражданства
-     * @return - список сотрудников
+     * @see UserService#filterUser(Long, String, String, String, String, Long, Long)
      */
     @PostMapping(value = "/list")
     public List<UserListView> getUserList(@RequestParam Long officeId, String firstName, String lastName, String middleName, String position, Long docCode, Long citizenshipCode) {
@@ -50,8 +43,7 @@ public class UserController {
     /**
      * Получить сотрудника по идентификатору
      *
-     * @param id - идентификатор сотрудника, обязательный параметр
-     * @return - сотрудника
+     * @see UserService#userById(Long)
      */
     @GetMapping(value = "/{id}")
     public UserView getUserById(@PathVariable Long id) {
@@ -61,19 +53,7 @@ public class UserController {
     /**
      * Обновить данные сотрудника
      *
-     * @param id              - идентификатор сотрудника, обязательный параметр
-     * @param officeId        - идентификатор офиса
-     * @param firstName       - имя сотрудника, обязательный параметр
-     * @param secondName      - фамилия сотрудника
-     * @param middleName      - отчество сотрудника
-     * @param position        - должность сотрудника, обязательный параметр
-     * @param phone           - телефон сотрудника
-     * @param docName         - название документа сотрудника
-     * @param docNumber       - номер документа
-     * @param docDate         - дата документа
-     * @param citizenshipCode - код гражданства сотрудника
-     * @param isIdentified    - идентифицированность
-     * @return - сообщение result:success в случае успеха
+     *@see UserService#updateUser(Long, Long, String, String, String, String, String, String, String, String, Long, Boolean)
      */
     @PostMapping(value = "/update")
     public SuccessResultView updateUser(@RequestParam Long id, Long officeId, @RequestParam String firstName, String secondName, String middleName, @RequestParam String position, String phone, String docName, String docNumber, String docDate, Long citizenshipCode, Boolean isIdentified) {
@@ -83,18 +63,7 @@ public class UserController {
     /**
      * Сохранить данные сотрудника
      *
-     * @param officeId        - идентификатор офиса, обязательный параметр
-     * @param firstName       - имя сотрудника, обязательный параметр
-     * @param secondName      - фамилия сотрудника
-     * @param middleName      - отчество сотрудника
-     * @param position        - должность сотрудника, обязательный параметр
-     * @param phone           - телефон сотрудника
-     * @param docName         - название документа сотрудника
-     * @param docNumber       - номер документа
-     * @param docDate         - дата документа
-     * @param citizenshipCode - код гражданства сотрудника
-     * @param isIdentified    - идентифицированность
-     * @return - сообщение result:success в случае успеха
+     * @see UserService#saveUser(Long, String, String, String, String, String, String, String, String, Long, Boolean)
      */
     @PostMapping(value = "/save")
     public SuccessResultView saveUser(@RequestParam Long officeId, @RequestParam String firstName, String secondName, String middleName, @RequestParam String position, String phone, String docName, String docNumber, String docDate, Long citizenshipCode, Boolean isIdentified) {

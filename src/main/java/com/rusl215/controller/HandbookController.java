@@ -24,7 +24,7 @@ public class HandbookController {
     }
 
     /**
-     * @return - список документов
+     * @see HandbookService#countries()
      */
     @GetMapping(value = "/docs")
     public List<HandbookView> getAllDocs(){
@@ -32,7 +32,7 @@ public class HandbookController {
     }
 
     /**
-     * @return - список стран
+     * @see HandbookService#docs()
      */
     @GetMapping(value = "/countries")
     public List<HandbookView> getAllContries(){

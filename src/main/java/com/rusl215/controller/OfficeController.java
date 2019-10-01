@@ -33,11 +33,7 @@ public class OfficeController {
     /**
      * Получить список офисов по фильтрам
      *
-     * @param orgId    - идентификатор организации, обязательный параметр
-     * @param name     - имя офиса
-     * @param phone    - телефон офиса
-     * @param isActive - активность офиса
-     * @return -  список офисов
+     * @see OfficeService#filterOffice(Long, String, String, Boolean)
      */
     @PostMapping(value = "/list")
     public List<OfficeListView> getOfficeList(@RequestParam Long orgId, String name, String phone, Boolean isActive) {
@@ -47,8 +43,7 @@ public class OfficeController {
     /**
      * Получить офис по идентификатору
      *
-     * @param id - идентификатор офиса, обязательный параметр
-     * @return - офис
+     * @see OfficeService#officeById(Long)
      */
     @GetMapping(value = "/{id}")
     public OfficeView getOfficeById(@PathVariable Long id) {
@@ -58,12 +53,7 @@ public class OfficeController {
     /**
      * Обновить офис
      *
-     * @param id       - идентификатор офиса, обязательный параметр
-     * @param name     - имя офиса, обязательный параметр
-     * @param address  - адрес офиса, обязательный параметр
-     * @param phone    - телефон офиса
-     * @param isActive - активность офиса
-     * @return - сообщение result:success в случае успеха
+     * @see OfficeService#updateOffice(Long, String, String, String, Boolean)
      */
     @PostMapping(value = "/update")
     public SuccessResultView updateOffice(@RequestParam Long id, @RequestParam String name, @RequestParam String address, String phone, Boolean isActive) {
@@ -73,12 +63,7 @@ public class OfficeController {
     /**
      * Сохранить офис
      *
-     * @param orgId    - идентификатор организации, обязательный параметр
-     * @param name     - имя офиса
-     * @param address  - адрес офиса
-     * @param phone    - телефон офиса
-     * @param isActive - активность офиса
-     * @return - сообщение result:success в случае успеха
+     * @see OfficeService#saveOffice(Long, String, String, String, Boolean)
      */
     @PostMapping(value = "/save")
     public SuccessResultView saveOffice(@RequestParam Long orgId, String name, String address, String phone, Boolean isActive) {
