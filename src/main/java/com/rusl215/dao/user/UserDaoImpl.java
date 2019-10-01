@@ -80,7 +80,13 @@ public class UserDaoImpl implements UserDao {
      */
     @Override
     public User getUserById(@NotNull Long id) {
-        return entityManager.find(User.class, id);
+        User user = entityManager.find(User.class, id);
+
+        if (user == null){
+            throw new RuntimeException("User with id=" + id + " not found");
+        }
+
+        return user;
     }
 
     /**

@@ -62,7 +62,11 @@ public class OfficeDaoImpl implements OfficeDao {
      */
     @Override
     public Office getOfficeById(@NotNull Long id) {
-        return entityManager.find(Office.class, id);
+        Office office = entityManager.find(Office.class, id);
+        if (office == null){
+            throw new RuntimeException("office with id="+ id + " not found");
+        }
+        return office;
     }
 
     /**

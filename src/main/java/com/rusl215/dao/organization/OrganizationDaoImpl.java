@@ -59,7 +59,13 @@ public class OrganizationDaoImpl implements OrganizationDao {
      */
     @Override
     public Organization getOrganizationById(@NotNull Long id) {
-        return entityManager.find(Organization.class, id);
+        Organization organization = entityManager.find(Organization.class, id);
+
+        if (organization == null){
+            throw new RuntimeException("Organization with id=" + id + " not found");
+        }
+
+        return organization;
     }
 
     /**
