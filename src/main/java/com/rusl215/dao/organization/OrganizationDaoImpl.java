@@ -88,9 +88,7 @@ public class OrganizationDaoImpl implements OrganizationDao {
     public void saveOrganization(@NotNull String name, @NotNull String fullName, @NotNull String inn, @NotNull String kpp, @NotNull String address, String phone, Boolean isActive) {
         Organization organization = new Organization(name, fullName, inn, kpp, address);
         organization.setPhone(phone);
-        if (isActive != null) {
-            organization.setActive(isActive);
-        }
+        organization.setActive(isActive);
         entityManager.persist(organization);
     }
 }

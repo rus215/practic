@@ -135,15 +135,11 @@ public class UserDaoImpl implements UserDao {
 
         user.setOffice(office);
 
-        if (secondName != null) {
-            user.setSecondName(secondName);
-        }
-        if (middleName != null) {
-            user.setMiddleName(middleName);
-        }
-        if (phone != null) {
-            user.setPhone(phone);
-        }
+        user.setSecondName(secondName);
+
+        user.setMiddleName(middleName);
+
+        user.setPhone(phone);
 
         if (citizenshipCode != null) {
             Country country = entityManager.find(Country.class, citizenshipCode);
@@ -161,21 +157,18 @@ public class UserDaoImpl implements UserDao {
         if (docName != null) {
             user.getDoc().setDocType(getDocTypeByName(docName));
         }
-        if (docNumber != null) {
-            user.getDoc().setDocNumber(docNumber);
-        }
+
+        user.getDoc().setDocNumber(docNumber);
+
         if (docDate != null) {
             Date newDate = Date.valueOf(docDate);
             user.getDoc().setDocDate(newDate);
         }
 
-        if (isIdentified != null) {
-            user.getDoc().setIdentified(isIdentified);
-        }
-
+        user.getDoc().setIdentified(isIdentified);
     }
 
-    private DocType getDocTypeByName(String docName){
+    private DocType getDocTypeByName(String docName) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<DocType> query = criteriaBuilder.createQuery(DocType.class);
         Root<DocType> root = query.from(DocType.class);
@@ -187,7 +180,7 @@ public class UserDaoImpl implements UserDao {
         return typedQuery.getSingleResult();
     }
 
-    private DocType getDefaultDocType(){
+    private DocType getDefaultDocType() {
         return getDocTypeByName("Паспорт гражданина РФ");
     }
 }

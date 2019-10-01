@@ -88,9 +88,7 @@ public class OfficeDaoImpl implements OfficeDao {
     public void insertOffice(@NotNull Long orgId, String name, String address, String phone, Boolean isActive) {
         Organization organization = entityManager.find(Organization.class, orgId);
         Office office = new Office(name, address, phone);
-        if (isActive != null){
-            office.setActive(isActive);
-        }
+        office.setActive(isActive);
         office.setOrganization(organization);
         entityManager.persist(office);
     }
