@@ -20,6 +20,12 @@ public class Doc {
     private Long id;
 
     /**
+     * Оптимистичная блокировка по полю version
+     */
+    @Version
+    private Integer version;
+
+    /**
      * Дата документа
      */
     @Column(name = "doc_date")
@@ -33,23 +39,17 @@ public class Doc {
     private String docNumber;
 
     /**
-     * Тип документа
-     */
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "doc_code")
-    private DocType docType;
-
-    /**
      * Идентифицированный
      */
     @Column(name = "is_identified")
     private Boolean isIdentified;
 
     /**
-     * Оптимистичная блокировка по полю version
+     * Тип документа
      */
-    @Version
-    private Integer version;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "doc_code")
+    private DocType docType;
 
     /**
      * Конструктор для Hibernate

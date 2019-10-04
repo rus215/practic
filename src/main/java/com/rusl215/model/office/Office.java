@@ -27,6 +27,12 @@ public class Office {
     private Long id;
 
     /**
+     * Оптимистичная блокировка по полю version
+     */
+    @Version
+    private Integer version;
+
+    /**
      * Название офиса
      */
     @Column(length = 20)
@@ -60,12 +66,6 @@ public class Office {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "org_id")
     private Organization organization;
-
-    /**
-     * Оптимистичная блокировка по полю version
-     */
-    @Version
-    private Integer version;
 
     /**
      * Конструктор для Hibernate

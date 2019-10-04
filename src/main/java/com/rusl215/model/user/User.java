@@ -26,6 +26,12 @@ public class User {
     private Long id;
 
     /**
+     * Оптимистичная блокировка по полю version
+     */
+    @Version
+    private Integer version;
+
+    /**
      * Имя сотрудника
      */
     @Column(name = "first_name", length = 20, nullable = false)
@@ -75,12 +81,6 @@ public class User {
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "id")
     private Doc doc;
-
-    /**
-     * Оптимистичная блокировка по полю version
-     */
-    @Version
-    private Integer version;
 
     /**
      * Конструктор для Hibernate

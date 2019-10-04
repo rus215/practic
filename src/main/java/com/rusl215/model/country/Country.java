@@ -14,16 +14,16 @@ public class Country {
     private Long code;
 
     /**
-     * Название страны
-     */
-    @Column(nullable = false, length = 50)
-    private String name;
-
-    /**
      * Оптимистичная блокировка по полю version
      */
     @Version
     private Integer version;
+
+    /**
+     * Название страны
+     */
+    @Column(nullable = false, length = 50)
+    private String name;
 
     /**
      * Конструктор для Hibernate

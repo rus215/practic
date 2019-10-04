@@ -16,16 +16,16 @@ public class DocType {
     private Long code;
 
     /**
-     * Название документа
-     */
-    @Column(nullable = false, length = 50)
-    private String name;
-
-    /**
      * Оптимистичная блокировка по полю version
      */
     @Version
     private Integer version;
+
+    /**
+     * Название документа
+     */
+    @Column(nullable = false, length = 50)
+    private String name;
 
     /**
      * Конструктор для Hibernate

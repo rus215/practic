@@ -24,6 +24,12 @@ public class Organization {
     private Long id;
 
     /**
+     * Оптимистичная блокировка по полю version
+     */
+    @Version
+    private Integer version;
+
+    /**
      * Сокращенное название организации
      */
     @Column(nullable = false, length = 10)
@@ -71,12 +77,6 @@ public class Organization {
     @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JoinColumn(name = "org_id")
     private List<Office> offices;
-
-    /**
-     * Оптимистичная блокировка по полю version
-     */
-    @Version
-    private Integer version;
 
     /**
      * Конструктор для Hibernate
