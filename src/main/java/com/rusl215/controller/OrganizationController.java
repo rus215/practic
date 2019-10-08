@@ -1,15 +1,17 @@
 package com.rusl215.controller;
 
 import com.rusl215.service.organization.OrganizationService;
+import com.rusl215.view.organization.OrganizationListFilterView;
 import com.rusl215.view.organization.OrganizationListView;
+import com.rusl215.view.organization.OrganizationSaveView;
 import com.rusl215.view.organization.OrganizationView;
 import com.rusl215.view.success.SuccessResultView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -33,12 +35,12 @@ public class OrganizationController {
     /**
      * Получить список организаций по фильтрам
      *
-     * @see OrganizationService#filterOrganization(String, String, Boolean)
+     * @see OrganizationService#filterOrganization(OrganizationListFilterView)
      */
     @PostMapping(value = "/list")
-    public List<OrganizationListView> getOrganizationList(@RequestParam String name, String inn, Boolean isActive) {
+    public List<OrganizationListView> getOrganizationList(@RequestBody OrganizationListFilterView filterView) {
 
-        return organizationService.filterOrganization(name, inn, isActive);
+        return organizationService.filterOrganization(filterView);
     }
 
     /**
@@ -54,20 +56,20 @@ public class OrganizationController {
     /**
      * Обновить организацию
      *
-     * @see OrganizationService#updateOrganization(Long, String, String, String, String, String, String, Boolean)
+     * @see OrganizationService#updateOrganization(OrganizationView)
      */
     @PostMapping(value = "/update")
-    public SuccessResultView updateOrganization(@RequestParam Long id, @RequestParam String name, @RequestParam String fullName, @RequestParam String inn, @RequestParam String kpp, @RequestParam String address, String phone, Boolean isActive) {
-        return organizationService.updateOrganization(id, name, fullName, inn, kpp, address, phone, isActive);
+    public SuccessResultView updateOrganization(@RequestBody OrganizationView organizationView) {
+        return organizationService.updateOrganization(organizationView);
     }
 
     /**
      * Сохранить организацию
      *
-     * @see OrganizationService#saveOrganization(String, String, String, String, String, String, Boolean)
+     * @see OrganizationService#saveOrganization(OrganizationSaveView)
      */
     @PostMapping(value = "/save")
-    public SuccessResultView saveOrganization(@RequestParam String name, @RequestParam String fullName, @RequestParam String inn, @RequestParam String kpp, @RequestParam String address, String phone, Boolean isActive) {
-        return organizationService.saveOrganization(name, fullName, inn, kpp, address, phone, isActive);
+    public SuccessResultView saveOrganization(@RequestBody OrganizationSaveView organizationSaveView) {
+        return organizationService.saveOrganization(organizationSaveView);
     }
 }

@@ -2,14 +2,17 @@ package com.rusl215.controller;
 
 import com.rusl215.service.user.UserService;
 import com.rusl215.view.success.SuccessResultView;
+import com.rusl215.view.user.UserListFilterView;
 import com.rusl215.view.user.UserListView;
+import com.rusl215.view.user.UserSaveView;
+import com.rusl215.view.user.UserUpdateView;
 import com.rusl215.view.user.UserView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -33,11 +36,11 @@ public class UserController {
     /**
      * Получить список сотрудников по фильтрам
      *
-     * @see UserService#filterUser(Long, String, String, String, String, Long, Long)
+     * @see UserService#filterUser(UserListFilterView)
      */
     @PostMapping(value = "/list")
-    public List<UserListView> getUserList(@RequestParam Long officeId, String firstName, String lastName, String middleName, String position, Long docCode, Long citizenshipCode) {
-        return userService.filterUser(officeId, firstName, lastName, middleName, position, docCode, citizenshipCode);
+    public List<UserListView> getUserList(@RequestBody UserListFilterView userListFilterView) {
+        return userService.filterUser(userListFilterView);
     }
 
     /**
@@ -53,20 +56,20 @@ public class UserController {
     /**
      * Обновить данные сотрудника
      *
-     *@see UserService#updateUser(Long, Long, String, String, String, String, String, String, String, String, Long, Boolean)
+     *@see UserService#updateUser(UserUpdateView)
      */
     @PostMapping(value = "/update")
-    public SuccessResultView updateUser(@RequestParam Long id, Long officeId, @RequestParam String firstName, String secondName, String middleName, @RequestParam String position, String phone, String docName, String docNumber, String docDate, Long citizenshipCode, Boolean isIdentified) {
-        return userService.updateUser(id, officeId, firstName, secondName, middleName, position, phone, docName, docNumber, docDate, citizenshipCode, isIdentified);
+    public SuccessResultView updateUser(@RequestBody UserUpdateView userUpdateView) {
+        return userService.updateUser(userUpdateView);
     }
 
     /**
      * Сохранить данные сотрудника
      *
-     * @see UserService#saveUser(Long, String, String, String, String, String, String, String, String, Long, Boolean)
+     * @see UserService#saveUser(UserSaveView)
      */
     @PostMapping(value = "/save")
-    public SuccessResultView saveUser(@RequestParam Long officeId, @RequestParam String firstName, String secondName, String middleName, @RequestParam String position, String phone, String docName, String docNumber, String docDate, Long citizenshipCode, Boolean isIdentified) {
-        return userService.saveUser(officeId, firstName, secondName, middleName, position, phone, docName, docNumber, docDate, citizenshipCode, isIdentified);
+    public SuccessResultView saveUser(@RequestBody UserSaveView userSaveView) {
+        return userService.saveUser(userSaveView);
     }
 }

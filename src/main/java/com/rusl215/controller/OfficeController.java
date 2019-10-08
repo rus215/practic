@@ -1,15 +1,17 @@
 package com.rusl215.controller;
 
 import com.rusl215.service.office.OfficeService;
+import com.rusl215.view.office.OfficeListFilterView;
 import com.rusl215.view.office.OfficeListView;
+import com.rusl215.view.office.OfficeSaveView;
 import com.rusl215.view.office.OfficeView;
 import com.rusl215.view.success.SuccessResultView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -33,11 +35,11 @@ public class OfficeController {
     /**
      * Получить список офисов по фильтрам
      *
-     * @see OfficeService#filterOffice(Long, String, String, Boolean)
+     * @see OfficeService#filterOffice(OfficeListFilterView)
      */
     @PostMapping(value = "/list")
-    public List<OfficeListView> getOfficeList(@RequestParam Long orgId, String name, String phone, Boolean isActive) {
-        return officeService.filterOffice(orgId, name, phone, isActive);
+    public List<OfficeListView> getOfficeList(@RequestBody OfficeListFilterView filterView) {
+        return officeService.filterOffice(filterView);
     }
 
     /**
@@ -53,21 +55,21 @@ public class OfficeController {
     /**
      * Обновить офис
      *
-     * @see OfficeService#updateOffice(Long, String, String, String, Boolean)
+     * @see OfficeService#updateOffice(OfficeView)
      */
     @PostMapping(value = "/update")
-    public SuccessResultView updateOffice(@RequestParam Long id, @RequestParam String name, @RequestParam String address, String phone, Boolean isActive) {
-        return officeService.updateOffice(id, name, address, phone, isActive);
+    public SuccessResultView updateOffice(@RequestBody OfficeView officeView) {
+        return officeService.updateOffice(officeView);
     }
 
     /**
      * Сохранить офис
      *
-     * @see OfficeService#saveOffice(Long, String, String, String, Boolean)
+     * @see OfficeService#saveOffice(OfficeSaveView)
      */
     @PostMapping(value = "/save")
-    public SuccessResultView saveOffice(@RequestParam Long orgId, String name, String address, String phone, Boolean isActive) {
-        return officeService.saveOffice(orgId, name, address, phone, isActive);
+    public SuccessResultView saveOffice(@RequestBody OfficeSaveView officeSaveView) {
+        return officeService.saveOffice(officeSaveView);
     }
 
 }

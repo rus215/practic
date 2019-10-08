@@ -35,7 +35,7 @@ public class HandbookController {
      * @see HandbookService#docs()
      */
     @GetMapping(value = "/countries")
-    public List<HandbookView> getAllContries(){
+    public List<HandbookView> getAllCountries(){
         return handbookService.countries();
     }
 }
