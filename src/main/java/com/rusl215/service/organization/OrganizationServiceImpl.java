@@ -3,7 +3,9 @@ package com.rusl215.service.organization;
 import com.rusl215.dao.organization.OrganizationDao;
 import com.rusl215.model.mapper.MapperFacade;
 import com.rusl215.model.organization.Organization;
+import com.rusl215.view.organization.OrganizationListFilterView;
 import com.rusl215.view.organization.OrganizationListView;
+import com.rusl215.view.organization.OrganizationSaveView;
 import com.rusl215.view.organization.OrganizationView;
 import com.rusl215.view.success.SuccessResultView;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +30,8 @@ public class OrganizationServiceImpl implements OrganizationService {
      */
     @Override
     @Transactional(readOnly = true)
-    public List<OrganizationListView> filterOrganization(String name, String inn, Boolean isActive) {
-        List<Organization> list = organizationDao.getOrganizationByFilter(name, inn, isActive);
+    public List<OrganizationListView> filterOrganization(OrganizationListFilterView organizationListFilterView) {
+        List<Organization> list = organizationDao.getOrganizationByFilter(organizationListFilterView.name, organizationListFilterView.inn, organizationListFilterView.isActive);
         return mapperFacade.mapAsList(list, OrganizationListView.class);
     }
 
@@ -47,8 +49,8 @@ public class OrganizationServiceImpl implements OrganizationService {
      */
     @Override
     @Transactional
-    public SuccessResultView updateOrganization(Long id, String name, String fullName, String inn, String kpp, String address, String phone, Boolean isActive) {
-        organizationDao.updateOrganization(id, name, fullName, inn, kpp, address, phone, isActive);
+    public SuccessResultView updateOrganization(OrganizationView organizationView) {
+        organizationDao.updateOrganization(organizationView.id,organizationView.name,organizationView.fullName,organizationView.inn,organizationView.kpp,organizationView.address,organizationView.phone,organizationView.isActive);
         return new SuccessResultView();
     }
 
@@ -57,8 +59,8 @@ public class OrganizationServiceImpl implements OrganizationService {
      */
     @Override
     @Transactional
-    public SuccessResultView saveOrganization(String name, String fullName, String inn, String kpp, String address, String phone, Boolean isActive) {
-        organizationDao.saveOrganization(name, fullName, inn, kpp, address, phone, isActive);
+    public SuccessResultView saveOrganization(OrganizationSaveView organizationSaveView) {
+        organizationDao.saveOrganization(organizationSaveView.name,organizationSaveView.fullName,organizationSaveView.inn,organizationSaveView.kpp,organizationSaveView.address,organizationSaveView.phone,organizationSaveView.isActive);
         return new SuccessResultView();
     }
 }

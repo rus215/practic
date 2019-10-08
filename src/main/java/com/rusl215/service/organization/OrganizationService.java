@@ -1,30 +1,35 @@
 package com.rusl215.service.organization;
 
+import com.rusl215.view.organization.OrganizationListFilterView;
 import com.rusl215.view.organization.OrganizationListView;
+import com.rusl215.view.organization.OrganizationSaveView;
 import com.rusl215.view.organization.OrganizationView;
 import com.rusl215.view.success.SuccessResultView;
+import org.springframework.validation.annotation.Validated;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
  * Сервис для организации
  */
+@Validated
 public interface OrganizationService {
 
     /**
      * Получить список организаций по фильтрам
      *
-     * @param name     - имя организации, обязательный параметр
-     * @param inn      - ИНН организации
-     * @param isActive - активность организации
+     * @param organizationListFilterView - содержит параметры фильтрации
+     *
      * @return - список организаций
      */
-    List<OrganizationListView> filterOrganization(String name, String inn, Boolean isActive);
+    List<OrganizationListView> filterOrganization(@Valid OrganizationListFilterView organizationListFilterView);
 
     /**
      * Получить организацию по идентификатору
      *
      * @param id - идентификатор организации, обязательный параметр
+     *
      * @return - организацию
      */
     OrganizationView organizationById(Long id);
@@ -32,29 +37,18 @@ public interface OrganizationService {
     /**
      * Обновить организацию
      *
-     * @param id       - идентификатор организации, обязательный параметр
-     * @param name     - сокращенное название организации, обязательный параметр
-     * @param fullName - полное название организации, обязательный параметр
-     * @param inn      - ИНН организации, обязательный параметр
-     * @param kpp      - КПП организации, обязательный параметр
-     * @param address  - адрес организации, обязательный параметр
-     * @param phone    - телефон организации
-     * @param isActive - активность организации
+     * @param organizationView - содержит параметры обновления организации
+     *
      * @return - result:success в случае успеха
      */
-    SuccessResultView updateOrganization(Long id, String name, String fullName, String inn, String kpp, String address, String phone, Boolean isActive);
+    SuccessResultView updateOrganization(@Valid OrganizationView organizationView);
 
     /**
      * Сохранить организацию
      *
-     * @param name     - сокращенное название организации, обязательный параметр
-     * @param fullName - полное название организации, обязательный параметр
-     * @param inn      - ИНН организации, обязательный параметр
-     * @param kpp      - КПП организации, обязательный параметр
-     * @param address  - адрес организации, обязательный параметр
-     * @param phone    - телефон организации
-     * @param isActive - активность организации
+     * @param organizationSaveView - содержит параметры сохранения организации
+     *
      * @return - сообщение result:success в случае успеха
      */
-    SuccessResultView saveOrganization(String name, String fullName, String inn, String kpp, String address, String phone, Boolean isActive);
+    SuccessResultView saveOrganization(@Valid OrganizationSaveView organizationSaveView);
 }

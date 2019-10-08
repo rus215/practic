@@ -4,7 +4,10 @@ import com.rusl215.dao.user.UserDao;
 import com.rusl215.model.mapper.MapperFacade;
 import com.rusl215.model.user.User;
 import com.rusl215.view.success.SuccessResultView;
+import com.rusl215.view.user.UserListFilterView;
 import com.rusl215.view.user.UserListView;
+import com.rusl215.view.user.UserSaveView;
+import com.rusl215.view.user.UserUpdateView;
 import com.rusl215.view.user.UserView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,8 +31,8 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     @Transactional(readOnly = true)
-    public List<UserListView> filterUser(Long officeId, String firstName, String lastName, String middleName, String position, Long docCode, Long citizenshipCode) {
-        List<User> userList = userDao.getUserList(officeId, firstName, lastName, middleName, position, docCode, citizenshipCode);
+    public List<UserListView> filterUser(UserListFilterView userListFilterView) {
+        List<User> userList = userDao.getUserList(userListFilterView.officeId, userListFilterView.firstName, userListFilterView.lastName, userListFilterView.middleName, userListFilterView.position, userListFilterView.docCode, userListFilterView.citizenshipCode);
         return mapperFacade.mapAsList(userList, UserListView.class);
     }
 
@@ -47,8 +50,8 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     @Transactional
-    public SuccessResultView updateUser(Long id, Long officeId, String firstName, String secondName, String middleName, String position, String phone, String docName, String docNumber, String docDate, Long citizenshipCode, Boolean isIdentified) {
-        userDao.updateUser(id,officeId, firstName,secondName,middleName,position,phone,docName,docNumber,docDate,citizenshipCode,isIdentified);
+    public SuccessResultView updateUser(UserUpdateView userUpdateView) {
+        userDao.updateUser(userUpdateView.id, userUpdateView.officeId, userUpdateView.firstName, userUpdateView.secondName, userUpdateView.middleName, userUpdateView.position, userUpdateView.phone, userUpdateView.docName, userUpdateView.docNumber, userUpdateView.docDate, userUpdateView.citizenshipCode, userUpdateView.isIdentified);
         return new SuccessResultView();
     }
 
@@ -57,8 +60,8 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     @Transactional
-    public SuccessResultView saveUser(Long officeId, String firstName, String secondName, String middleName, String position, String phone, String docName, String docNumber, String docDate, Long citizenshipCode, Boolean isIdentified) {
-        userDao.insertUser(officeId, firstName,secondName,middleName,position,phone,docName,docNumber,docDate,citizenshipCode,isIdentified);
+    public SuccessResultView saveUser(UserSaveView userSaveView) {
+        userDao.insertUser(userSaveView.officeId, userSaveView.firstName, userSaveView.secondName, userSaveView.middleName, userSaveView.position, userSaveView.phone, userSaveView.docName, userSaveView.docNumber, userSaveView.docDate, userSaveView.citizenshipCode, userSaveView.isIdentified);
         return new SuccessResultView();
     }
 }
