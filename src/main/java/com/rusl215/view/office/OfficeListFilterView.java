@@ -3,26 +3,19 @@ package com.rusl215.view.office;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class OfficeView {
+public class OfficeListFilterView {
     /**
-     * идентификатор офиса
+     * идентификатор организации
      */
-    @NotNull(message = "id can not be null")
-    public Long id;
+    @NotNull(message = "orgId can not be null")
+    public Long orgId;
     /**
      * название офиса
      */
-    @NotNull(message = "name can not be null")
     @Size(max = 20)
     public String name;
     /**
-     * адрес офиса
-     */
-    @NotNull(message = "address can not be null")
-    @Size(max = 50)
-    public String address;
-    /**
-     * телефон офиса
+     * название телефон
      */
     @Size(max = 15)
     public String phone;

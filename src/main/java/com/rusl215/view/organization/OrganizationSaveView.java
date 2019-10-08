@@ -3,12 +3,7 @@ package com.rusl215.view.organization;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class OrganizationView {
-    /**
-     * идентификатор организации
-     */
-    @NotNull(message = "id can not be null")
-    public Long id;
+public class OrganizationSaveView {
     /**
      * сокращенное название организации
      */
