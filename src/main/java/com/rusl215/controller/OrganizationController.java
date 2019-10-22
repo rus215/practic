@@ -5,7 +5,6 @@ import com.rusl215.view.organization.OrganizationListFilterView;
 import com.rusl215.view.organization.OrganizationListView;
 import com.rusl215.view.organization.OrganizationSaveView;
 import com.rusl215.view.organization.OrganizationView;
-import com.rusl215.view.success.SuccessResultView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -59,8 +58,8 @@ public class OrganizationController {
      * @see OrganizationService#updateOrganization(OrganizationView)
      */
     @PostMapping(value = "/update")
-    public SuccessResultView updateOrganization(@RequestBody OrganizationView organizationView) {
-        return organizationService.updateOrganization(organizationView);
+    public void updateOrganization(@RequestBody OrganizationView organizationView) {
+        organizationService.updateOrganization(organizationView);
     }
 
     /**
@@ -69,7 +68,7 @@ public class OrganizationController {
      * @see OrganizationService#saveOrganization(OrganizationSaveView)
      */
     @PostMapping(value = "/save")
-    public SuccessResultView saveOrganization(@RequestBody OrganizationSaveView organizationSaveView) {
-        return organizationService.saveOrganization(organizationSaveView);
+    public void saveOrganization(@RequestBody OrganizationSaveView organizationSaveView) {
+        organizationService.saveOrganization(organizationSaveView);
     }
 }

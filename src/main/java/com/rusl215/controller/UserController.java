@@ -1,7 +1,6 @@
 package com.rusl215.controller;
 
 import com.rusl215.service.user.UserService;
-import com.rusl215.view.success.SuccessResultView;
 import com.rusl215.view.user.UserListFilterView;
 import com.rusl215.view.user.UserListView;
 import com.rusl215.view.user.UserSaveView;
@@ -59,8 +58,8 @@ public class UserController {
      *@see UserService#updateUser(UserUpdateView)
      */
     @PostMapping(value = "/update")
-    public SuccessResultView updateUser(@RequestBody UserUpdateView userUpdateView) {
-        return userService.updateUser(userUpdateView);
+    public void updateUser(@RequestBody UserUpdateView userUpdateView) {
+        userService.updateUser(userUpdateView);
     }
 
     /**
@@ -69,7 +68,7 @@ public class UserController {
      * @see UserService#saveUser(UserSaveView)
      */
     @PostMapping(value = "/save")
-    public SuccessResultView saveUser(@RequestBody UserSaveView userSaveView) {
-        return userService.saveUser(userSaveView);
+    public void saveUser(@RequestBody UserSaveView userSaveView) {
+        userService.saveUser(userSaveView);
     }
 }

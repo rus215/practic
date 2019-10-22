@@ -5,7 +5,6 @@ import com.rusl215.view.office.OfficeListFilterView;
 import com.rusl215.view.office.OfficeListView;
 import com.rusl215.view.office.OfficeSaveView;
 import com.rusl215.view.office.OfficeView;
-import com.rusl215.view.success.SuccessResultView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -58,8 +57,8 @@ public class OfficeController {
      * @see OfficeService#updateOffice(OfficeView)
      */
     @PostMapping(value = "/update")
-    public SuccessResultView updateOffice(@RequestBody OfficeView officeView) {
-        return officeService.updateOffice(officeView);
+    public void updateOffice(@RequestBody OfficeView officeView) {
+        officeService.updateOffice(officeView);
     }
 
     /**
@@ -68,8 +67,8 @@ public class OfficeController {
      * @see OfficeService#saveOffice(OfficeSaveView)
      */
     @PostMapping(value = "/save")
-    public SuccessResultView saveOffice(@RequestBody OfficeSaveView officeSaveView) {
-        return officeService.saveOffice(officeSaveView);
+    public void saveOffice(@RequestBody OfficeSaveView officeSaveView) {
+        officeService.saveOffice(officeSaveView);
     }
 
 }
