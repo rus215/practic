@@ -4,7 +4,6 @@ import com.rusl215.view.organization.OrganizationListFilterView;
 import com.rusl215.view.organization.OrganizationListView;
 import com.rusl215.view.organization.OrganizationSaveView;
 import com.rusl215.view.organization.OrganizationView;
-import com.rusl215.view.success.SuccessResultView;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
@@ -41,7 +40,7 @@ public interface OrganizationService {
      *
      * @return - result:success в случае успеха
      */
-    SuccessResultView updateOrganization(@Valid OrganizationView organizationView);
+    void updateOrganization(@Valid OrganizationView organizationView);
 
     /**
      * Сохранить организацию
@@ -50,5 +49,5 @@ public interface OrganizationService {
      *
      * @return - сообщение result:success в случае успеха
      */
-    SuccessResultView saveOrganization(@Valid OrganizationSaveView organizationSaveView);
+    void saveOrganization(@Valid OrganizationSaveView organizationSaveView);
 }

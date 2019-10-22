@@ -1,6 +1,5 @@
 package com.rusl215.service.user;
 
-import com.rusl215.view.success.SuccessResultView;
 import com.rusl215.view.user.UserListFilterView;
 import com.rusl215.view.user.UserListView;
 import com.rusl215.view.user.UserSaveView;
@@ -42,7 +41,7 @@ public interface UserService {
      *
      * @return - сообщение result:success в случае успеха
      */
-    SuccessResultView updateUser(@Valid UserUpdateView userUpdateView);
+    void updateUser(@Valid UserUpdateView userUpdateView);
 
     /**
      * Сохранить данные сотрудника
@@ -51,5 +50,5 @@ public interface UserService {
      *
      * @return - сообщение result:success в случае успеха
      */
-    SuccessResultView saveUser(@Valid UserSaveView userSaveView);
+    void saveUser(@Valid UserSaveView userSaveView);
 }

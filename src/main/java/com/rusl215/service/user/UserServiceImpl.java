@@ -3,7 +3,6 @@ package com.rusl215.service.user;
 import com.rusl215.dao.user.UserDao;
 import com.rusl215.model.mapper.MapperFacade;
 import com.rusl215.model.user.User;
-import com.rusl215.view.success.SuccessResultView;
 import com.rusl215.view.user.UserListFilterView;
 import com.rusl215.view.user.UserListView;
 import com.rusl215.view.user.UserSaveView;
@@ -50,9 +49,8 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     @Transactional
-    public SuccessResultView updateUser(UserUpdateView userUpdateView) {
+    public void updateUser(UserUpdateView userUpdateView) {
         userDao.updateUser(userUpdateView.id, userUpdateView.officeId, userUpdateView.firstName, userUpdateView.secondName, userUpdateView.middleName, userUpdateView.position, userUpdateView.phone, userUpdateView.docName, userUpdateView.docNumber, userUpdateView.docDate, userUpdateView.citizenshipCode, userUpdateView.isIdentified);
-        return new SuccessResultView();
     }
 
     /**
@@ -60,8 +58,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     @Transactional
-    public SuccessResultView saveUser(UserSaveView userSaveView) {
+    public void saveUser(UserSaveView userSaveView) {
         userDao.insertUser(userSaveView.officeId, userSaveView.firstName, userSaveView.secondName, userSaveView.middleName, userSaveView.position, userSaveView.phone, userSaveView.docName, userSaveView.docNumber, userSaveView.docDate, userSaveView.citizenshipCode, userSaveView.isIdentified);
-        return new SuccessResultView();
     }
 }

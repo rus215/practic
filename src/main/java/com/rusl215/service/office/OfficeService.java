@@ -4,7 +4,6 @@ import com.rusl215.view.office.OfficeListFilterView;
 import com.rusl215.view.office.OfficeListView;
 import com.rusl215.view.office.OfficeSaveView;
 import com.rusl215.view.office.OfficeView;
-import com.rusl215.view.success.SuccessResultView;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
@@ -40,7 +39,7 @@ public interface OfficeService {
      *
      * @return - сообщение result:success в случае успеха
      */
-    SuccessResultView updateOffice(@Valid OfficeView officeView);
+    void updateOffice(@Valid OfficeView officeView);
 
     /**
      * Сохранить офис
@@ -49,5 +48,5 @@ public interface OfficeService {
      *
      * @return - сообщение result:success в случае успеха
      */
-    SuccessResultView saveOffice(@Valid OfficeSaveView officeSaveView);
+    void saveOffice(@Valid OfficeSaveView officeSaveView);
 }

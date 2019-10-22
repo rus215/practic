@@ -7,7 +7,6 @@ import com.rusl215.view.organization.OrganizationListFilterView;
 import com.rusl215.view.organization.OrganizationListView;
 import com.rusl215.view.organization.OrganizationSaveView;
 import com.rusl215.view.organization.OrganizationView;
-import com.rusl215.view.success.SuccessResultView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,9 +48,8 @@ public class OrganizationServiceImpl implements OrganizationService {
      */
     @Override
     @Transactional
-    public SuccessResultView updateOrganization(OrganizationView organizationView) {
+    public void updateOrganization(OrganizationView organizationView) {
         organizationDao.updateOrganization(organizationView.id,organizationView.name,organizationView.fullName,organizationView.inn,organizationView.kpp,organizationView.address,organizationView.phone,organizationView.isActive);
-        return new SuccessResultView();
     }
 
     /**
@@ -59,8 +57,7 @@ public class OrganizationServiceImpl implements OrganizationService {
      */
     @Override
     @Transactional
-    public SuccessResultView saveOrganization(OrganizationSaveView organizationSaveView) {
+    public void saveOrganization(OrganizationSaveView organizationSaveView) {
         organizationDao.saveOrganization(organizationSaveView.name,organizationSaveView.fullName,organizationSaveView.inn,organizationSaveView.kpp,organizationSaveView.address,organizationSaveView.phone,organizationSaveView.isActive);
-        return new SuccessResultView();
     }
 }

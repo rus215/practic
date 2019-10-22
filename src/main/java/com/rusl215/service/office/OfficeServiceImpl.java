@@ -7,7 +7,6 @@ import com.rusl215.view.office.OfficeListFilterView;
 import com.rusl215.view.office.OfficeListView;
 import com.rusl215.view.office.OfficeSaveView;
 import com.rusl215.view.office.OfficeView;
-import com.rusl215.view.success.SuccessResultView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,9 +48,8 @@ public class OfficeServiceImpl implements OfficeService {
      */
     @Override
     @Transactional
-    public SuccessResultView updateOffice(OfficeView officeView) {
+    public void updateOffice(OfficeView officeView) {
         officeDao.updateOffice(officeView.id, officeView.name, officeView.address, officeView.phone, officeView.isActive);
-        return new SuccessResultView();
     }
 
     /**
@@ -59,8 +57,7 @@ public class OfficeServiceImpl implements OfficeService {
      */
     @Override
     @Transactional
-    public SuccessResultView saveOffice(OfficeSaveView officeSaveView) {
+    public void saveOffice(OfficeSaveView officeSaveView) {
         officeDao.insertOffice(officeSaveView.orgId, officeSaveView.name, officeSaveView.address, officeSaveView.phone, officeSaveView.isActive);
-        return new SuccessResultView();
     }
 }
