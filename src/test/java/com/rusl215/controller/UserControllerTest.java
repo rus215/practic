@@ -1,5 +1,6 @@
 package com.rusl215.controller;
 
+import com.rusl215.controller.advice.exception.ExceptionHandling;
 import com.rusl215.view.user.UserListFilterView;
 import com.rusl215.view.user.UserSaveView;
 import com.rusl215.view.user.UserUpdateView;
@@ -22,7 +23,7 @@ public class UserControllerTest {
     private static final String BASE_URL = "/api/user";
     private static final String EXPECT_USER_LIST_JSON = "{\"data\":[{\"id\":\"1\",\"firstName\":\"Денис\",\"secondName\":\"Подлинов\",\"middleName\":\"Алексеевич\",\"position\":\"менеджер по проектам\"},{\"id\":\"2\",\"firstName\":\"Иван\",\"secondName\":\"Сухоруков\",\"middleName\":\"Андреевич\",\"position\":\"аналитик\"},{\"id\":\"3\",\"firstName\":\"Денис\",\"secondName\":\"Подлинов\",\"middleName\":\"Алексеевич\",\"position\":\"менеджер по проектам\"}]}";
     private static final String EXPECT_USER_JSON = "{\"data\":{\"id\":\"1\",\"firstName\":\"Денис\",\"secondName\":\"Подлинов\",\"middleName\":\"Алексеевич\",\"position\":\"менеджер по проектам\",\"phone\":\"89177754322\",\"docName\":\"Паспорт гражданина РФ\",\"docNumber\":\"8012694822\",\"docDate\":\"1992-04-21\",\"citizenshipName\":\"Российская Федерация\",\"citizenshipCode\":\"643\",\"isIdentified\":\"true\"}}";
-    private static final String SUCCESS_JSON = "{\"data\":{\"result\":\"success\"}}";
+    private static final String SUCCESS_JSON = "{\"result\":\"success\"}";
 
     @Autowired
     TestRestTemplate testRestTemplate;
@@ -41,7 +42,7 @@ public class UserControllerTest {
         UserListFilterView userListFilterView = new UserListFilterView();
 
         String body = testRestTemplate.postForObject(BASE_URL + "/list", userListFilterView, String.class);
-        assertThat(body).contains("officeId can not be null");
+        assertThat(body).contains(ExceptionHandling.EXS_STR);
     }
 
     @Test
@@ -55,7 +56,7 @@ public class UserControllerTest {
     public void negativeGetUserById() {
         int id = 10;
         String body = testRestTemplate.getForObject(BASE_URL + "/" + id, String.class);
-        assertThat(body).contains("User with id=" + id + " not found");
+        assertThat(body).contains(ExceptionHandling.EXS_STR);
     }
 
     @Test
@@ -77,7 +78,7 @@ public class UserControllerTest {
         userUpdateView.firstName = "Максим";
 
         String result = testRestTemplate.postForObject(BASE_URL + "/update", userUpdateView, String.class);
-        assertThat(result).contains("position can not be null");
+        assertThat(result).contains(ExceptionHandling.EXS_STR);
     }
 
     @Test
@@ -99,6 +100,6 @@ public class UserControllerTest {
         userSaveView.position = "UI дизайнер";
 
         String result = testRestTemplate.postForObject(BASE_URL + "/save", userSaveView, String.class);
-        assertThat(result).contains("officeId can not be null");
+        assertThat(result).contains(ExceptionHandling.EXS_STR);
     }
 }

@@ -1,5 +1,6 @@
 package com.rusl215.controller;
 
+import com.rusl215.controller.advice.exception.ExceptionHandling;
 import com.rusl215.view.organization.OrganizationListFilterView;
 import com.rusl215.view.organization.OrganizationSaveView;
 import com.rusl215.view.organization.OrganizationView;
@@ -22,7 +23,7 @@ public class OrganizationControllerTest {
     private static final String BASE_URL = "/api/organization";
     private static final String EXPECT_ORGANIZATION_JSON = "{\"data\":{\"id\":1,\"name\":\"IT\",\"fullName\":\"ООО IT\",\"inn\":\"1234905319\",\"kpp\":\"123463893\",\"address\":\"ул. Цурюпы 6\",\"phone\":\"83479875643\",\"isActive\":true}}";
     private static final String EXPECT_ORGANIZATION_LIST_JSON = "{\"data\":[{\"id\":\"1\",\"name\":\"IT\",\"isActive\":\"true\"}]}";
-    private static final String SUCCESS_JSON = "{\"data\":{\"result\":\"success\"}}";
+    private static final String SUCCESS_JSON = "{\"result\":\"success\"}";
 
     @Autowired
     private TestRestTemplate testRestTemplate;
@@ -39,7 +40,7 @@ public class OrganizationControllerTest {
     public void negativeGetOrganizationList() {
         OrganizationListFilterView organizationListFilterView = new OrganizationListFilterView();
         String body = testRestTemplate.postForObject(BASE_URL + "/list", organizationListFilterView, String.class);
-        assertThat(body).contains("name can not be null");
+        assertThat(body).contains(ExceptionHandling.EXS_STR);
     }
 
     @Test
@@ -53,7 +54,7 @@ public class OrganizationControllerTest {
     public void negativeGetOrganizationById() {
         int id = 4;
         String body = testRestTemplate.getForObject(BASE_URL + "/" + id, String.class);
-        assertThat(body).contains("Organization with id=" + id + " not found");
+        assertThat(body).contains(ExceptionHandling.EXS_STR);
     }
 
     @Test
@@ -79,7 +80,7 @@ public class OrganizationControllerTest {
         organizationView.kpp = "12345675";
         organizationView.address = "ул. Аксакова 13";
         String result = testRestTemplate.postForObject(BASE_URL + "/update", organizationView, String.class);
-        assertThat(result).contains("id can not be null");
+        assertThat(result).contains(ExceptionHandling.EXS_STR);
     }
 
     @Test
@@ -103,6 +104,6 @@ public class OrganizationControllerTest {
         organizationSaveView.kpp = "3214532456";
         organizationSaveView.address = "ул. Гагарина 10";
         String result = testRestTemplate.postForObject(BASE_URL + "/save", organizationSaveView, String.class);
-        assertThat(result).contains("name can not be null");
+        assertThat(result).contains(ExceptionHandling.EXS_STR);
     }
 }

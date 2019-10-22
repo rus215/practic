@@ -1,5 +1,6 @@
 package com.rusl215.controller;
 
+import com.rusl215.controller.advice.exception.ExceptionHandling;
 import com.rusl215.view.office.OfficeListFilterView;
 import com.rusl215.view.office.OfficeSaveView;
 import com.rusl215.view.office.OfficeView;
@@ -23,7 +24,7 @@ public class OfficeControllerTest {
     private static final String BASE_URL = "/api/office";
     private static final String EXPECT_OFFICE_LIST_JSON = "{\"data\":[{\"id\":\"1\",\"name\":\"ЦентрОфис\",\"isActive\":\"true\"},{\"id\":\"2\",\"name\":\"ВторойОфис\",\"isActive\":\"true\"}]}";
     private static final String EXPECT_OFFICE_JSON = "{\"data\":{\"id\":2,\"name\":\"ВторойОфис\",\"address\":\"ул. Цурюпы 34\",\"phone\":\"89874563542\",\"isActive\":true}}";
-    private static final String SUCCESS_JSON = "{\"data\":{\"result\":\"success\"}}";
+    private static final String SUCCESS_JSON = "{\"result\":\"success\"}";
 
     @Autowired
     private TestRestTemplate testRestTemplate;
@@ -40,7 +41,7 @@ public class OfficeControllerTest {
     public void negativeGetOfficeList() {
         OfficeListFilterView officeListFilterView = new OfficeListFilterView();
         String body = testRestTemplate.postForObject(BASE_URL + "/list", officeListFilterView, String.class);
-        assertThat(body).contains("orgId can not be null");
+        assertThat(body).contains(ExceptionHandling.EXS_STR);
     }
 
     @Test
@@ -54,7 +55,7 @@ public class OfficeControllerTest {
     public void negativeGetOfficeById() {
         int id = 6;
         String body = testRestTemplate.getForObject(BASE_URL + "/" + id, String.class);
-        assertThat(body).contains("office with id=" + id + " not found");
+        assertThat(body).contains(ExceptionHandling.EXS_STR);
     }
 
     @Test
@@ -74,7 +75,7 @@ public class OfficeControllerTest {
         officeView.id = 2L;
         officeView.address = "ул. Рабкорова 42";
         String result = testRestTemplate.postForObject(BASE_URL + "/update", officeView, String.class);
-        assertThat(result).contains("name can not be null");
+        assertThat(result).contains(ExceptionHandling.EXS_STR);
     }
 
     @Test
@@ -98,6 +99,6 @@ public class OfficeControllerTest {
         officeSaveView.phone = "89971234321";
         officeSaveView.isActive = true;
         String result = testRestTemplate.postForObject(BASE_URL + "/save", officeSaveView, String.class);
-        assertThat(result).contains("orgId can not be null");
+        assertThat(result).contains(ExceptionHandling.EXS_STR);
     }
 }
