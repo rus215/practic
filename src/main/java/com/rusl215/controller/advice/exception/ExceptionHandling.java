@@ -1,4 +1,4 @@
-package com.rusl215.controller.advice;
+package com.rusl215.controller.advice.exception;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -11,32 +11,15 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @RestControllerAdvice(basePackages = "com.rusl215.controller")
 public class ExceptionHandling extends ResponseEntityExceptionHandler {
 
+    public static final String EXS_STR = "Внутренняя ошибка сервера";
+
     @ExceptionHandler(RuntimeException.class)
     protected ResponseEntity<Object> handleRuntimeException(Exception ex) {
-        return new ResponseEntity<>(new ExceptionWrapper(ex.getMessage()), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(new ExceptionWrapper(EXS_STR), HttpStatus.BAD_REQUEST);
     }
 
     @Override
     protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        return new ResponseEntity<>(new ExceptionWrapper(ex.getMessage()), status);
-    }
-
-    /**
-     * Класс обертка для ошибок
-     */
-    private static class ExceptionWrapper {
-        private String error;
-
-        public ExceptionWrapper(String message) {
-            this.error = message;
-        }
-
-        public String getError() {
-            return error;
-        }
-
-        public void setError(String message) {
-            this.error = message;
-        }
+        return new ResponseEntity<>(new ExceptionWrapper(EXS_STR), status);
     }
 }
